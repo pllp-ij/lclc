@@ -13,6 +13,11 @@
         STEP 5
         Return countOfEvenNum
         
+    TIME:
+        O(n) * M, M is the average length of each number in array
+    SPACE:
+        O(1)
+        
     TO BE OPTIMIZED:
         
  */

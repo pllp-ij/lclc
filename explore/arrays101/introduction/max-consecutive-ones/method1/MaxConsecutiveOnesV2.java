@@ -23,6 +23,11 @@ import static java.lang.Math.max;
         STEP 6
             Return maxWindowLength
 
+    TIME:
+        O(n)
+    SPACE:
+        O(1)
+
     TO BE OPTIMIZED:
         Avoid the final updation on maxWindowLength
         maxWindowLength no need to be updated each time in consecutive zeros window

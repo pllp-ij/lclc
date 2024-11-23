@@ -25,6 +25,11 @@ import static java.lang.Math.max;
                 Reset curWindowLength to 0
         STEP 6
         Return maxWindowLength  
+        
+    TIME:
+        O(n)
+    SPACE:
+        O(1)
  */
 
 class MaxConsecutiveOnesV3 {
