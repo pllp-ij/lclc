@@ -13,7 +13,11 @@
         STEP 5
         Return countOfEvenNum
         
-        
+    TIME:
+        O(n)
+    SPACE:
+        O(1)
+       
     TO BE OPTIMIZED:
         
  */
