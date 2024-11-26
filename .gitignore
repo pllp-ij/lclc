@@ -1,2 +1,4 @@
 **/*.class
 compile.sh
+common-funcs/bin
+*.jar
