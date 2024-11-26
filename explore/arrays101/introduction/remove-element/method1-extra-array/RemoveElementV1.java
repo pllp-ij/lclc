@@ -1,4 +1,6 @@
+import static com.anno.arrays.PrintArrays.printArrRange;
 import java.util.Arrays;
+
 
 /**
     VARS:
@@ -47,24 +49,12 @@ class RemoveElementV1 {
         return nonValNum;
     }
     
-    public static void printArrRange(int[] nums, int start, int len) {
-            if (len < 0) {
-                return;
-            }
-            System.out.print("[" + nums[start]);
-            for (int i = start + 1; i <= start + len - 1; i++) {
-                System.out.print(", " + nums[i]);
-            }
-            System.out.println("]\n");
-    }
-    
     public static void main(String[] args) {
         // int[] nums = {3, 2, 2, 3};
         int[] nums = {0, 1, 2, 2, 3, 0, 4, 2};
         System.out.println("Before: " + Arrays.toString(nums));
         int k = removeElement(nums, 2);
-        System.out.println("After: ");
+        System.out.print("After: ");
         printArrRange(nums, 0, k);
-        
     }
 }
