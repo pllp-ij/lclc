@@ -33,6 +33,9 @@ import java.util.Arrays;
         O(n)
     SPACE:
         O(1)
+    TO BE OPTIMIZED:
+        Notice that STEP 3 combined with STEP 4 just equal to a swap manipulation, so how
+        to directly by applying swap operaion
 */
 
 class MoveZerosV1 {
