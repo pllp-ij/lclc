@@ -42,7 +42,7 @@ public class ManipulateArrays {
     /*
         Params:
             nums(int[]): integer array
-        Return
+        Return:
             newArr(int[]): copied array same as initial array
     */
     public static int[] copyArray(int[] nums) {
@@ -51,5 +51,19 @@ public class ManipulateArrays {
             newArr[i] = nums[i];
         }
         return newArr;
+    }
+    
+    /*
+        Params:
+            nums(int[]): integer array
+        Return:
+            sumRes(int): the sum of all elements in initial array
+    */
+    public static int sumArray(int[] nums) {
+        int sumRes = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sumRes += nums[i];
+        }
+        return sumRes;
     }
 }
