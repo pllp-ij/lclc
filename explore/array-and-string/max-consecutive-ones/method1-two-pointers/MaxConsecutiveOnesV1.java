@@ -40,9 +40,9 @@ import java.util.Arrays;
         STEP 12
         Return globalMaxNum
     TIME:
-        
+        O(n)
     SPACE:
-        
+        O(1)
 */
 
 class MaxConsecutiveOnesV1 {
