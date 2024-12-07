@@ -26,21 +26,15 @@
                     STEP 5
                     Advance idxResult by one step
                         idxResult++;
-                STEP 6
-                If idxEnd < idxStart, (meaning the idxEnd is left behind in last iteration of word)
-                    STEP 7
-                    Set idxEnd to idxStart to start this new turn of iteration on new word
-                        idxEnd = idxStart;
-                STEP 8
                 If idxEnd < sNew.length() and sNew.charAt(idxEnd) != '.', (meaning idxEnd still within valid range of new word)
-                    STEP 9
+                    STEP 6
                     Copy char at idxEnd to idxResult
                         sNew.setCharAt(idxResult, sNew.charAt(idxEnd));
-                    STEP 10
+                    STEP 7
                     Advance both idxEnd and idxResult by one step
                         idxEnd++;
                         idxResult++;
-                    STEP 11
+                    STEP 8
                     The copy operation means current iteration is not meeting a new word, so set newWordAppear to false
                         newWordAppear = false;
 
@@ -50,36 +44,36 @@
                         1 idxEnd >= sNew.length(), (meaning the final sub range of sNew is scanned completed, do once more reverse operation in the following then break the loop)
                         2 idxEnd < sNew.length() and sNew.charAt(idxEnd) == '.', (meaning the end of current word, do reverse operation in the following then continue to next iteration)
                         
-                    STEP 12
+                    STEP 9
                     Calculate the start point of the range to be reversed
                         int reverseRangeStart = idxResult - (idxEnd - idxStart);
-                    STEP 13
+                    STEP 10
                     Calculate the end point of the range to be reversed
                         int reverseRangeEnd = idxResult - 1
-                    STEP 14
+                    STEP 11
                     Reverse sNew from reverseRangeStart to reverseRangeEnd by calling method
                         reverseRange(sNew, reverseRangeStart, reverseRangeEnd);
-                    STEP 15
+                    STEP 12
                     If idxEnd >= sNew.length(),
-                        STEP 16
+                        STEP 13
                         Break the loop
                     
                     Now idxEnd < sNew.length() and sNew.charAt(idxEnd) == '.' in the following
                     
-                    STEP 17
+                    STEP 14
                     Advance idxEnd by one step
                         idxEnd++;
-                    STEP 18
+                    STEP 15
                     Set idxStart to idxEnd
                         idxStart = idxEnd
-                    STEP 19
+                    STEP 16
                     Since current iteration meet a '.', so the next iteration will be a new word, set newWordAppear to true
                         newWordAppear = true;
             Else, (meaning if sNew.charAt(idxStart) != '.')
-                STEP 20
+                STEP 17
                 Advance idxStart by one step
                     idxStart++;
-        STEP 21
+        STEP 18
         Return substring of sNew from 0 to idxResult - 1
             return sNew.substring(0, idxResult)
     TIME:
@@ -108,45 +102,39 @@ class ReverseWordsInStringV1 {
                     // STEP 5
                     idxResult++;
                 }
-                // STEP 6
-                if (idxEnd < idxStart) {
-                    // STEP 7
-                    idxEnd = idxStart;
-                }
-                // STEP 8
                 if (idxEnd < sNew.length() && sNew.charAt(idxEnd) != '.') {
-                    // STEP 9
+                    // STEP 6
                     sNew.setCharAt(idxResult, sNew.charAt(idxEnd));
-                    // STEP 10
+                    // STEP 7
                     idxResult++;
                     idxEnd++;
-                    // STEP 11
+                    // STEP 8
                     newWordAppear = false;
                 } else {
-                    // STEP 12
+                    // STEP 9
                     int reverseRangeStart = idxResult - (idxEnd - idxStart);
-                    // STEP 13
+                    // STEP 10
                     int reverseRangeEnd = idxResult - 1;
-                    // STEP 14
+                    // STEP 11
                     reverseRange(sNew, reverseRangeStart, reverseRangeEnd);
-                    // STEP 15
+                    // STEP 12
                     if (idxEnd >= sNew.length()) {
-                        // STEP 16
+                        // STEP 13
                         break;
                     }
-                    // STEP 17
+                    // STEP 14
                     idxEnd++;
-                    // STEP 18
+                    // STEP 15
                     idxStart = idxEnd;
-                    // STEP 19
+                    // STEP 16
                     newWordAppear = true;
                 }
             } else {
-                // STEP 20
+                // STEP 17
                 idxStart++;
             }
         }
-        // STEP 21
+        // STEP 18
         return sNew.substring(0, idxResult);
     }
     
