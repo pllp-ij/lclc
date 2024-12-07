@@ -3,6 +3,9 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
+    NOTE:
+        The STEP 7 actually can be skipped with continue in that loop, and STEP 8 & STEP 9 can be merged as single one since for any index within (pascalNum + 1),
+        the value of it exist in curLineArr
     VARS:
         curLineArr(int[]): an array to store each line of pascal triangle
         result(List<List<Integer>>): final return result
