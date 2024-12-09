@@ -18,10 +18,10 @@ import static java.lang.Math.max;
                     maxWindowLength = Max(maxWindowLength, curWindowLength);
                 Reset curWindowLength to 0 again
         STEP 5
-            Update maxWindowLength again for the cases where consecutive ones are at the end of array
-                maxWindowLength = Max(maxWindowLength, curWindowLength);
+        Update maxWindowLength again for the cases where consecutive ones are at the end of array
+            maxWindowLength = Max(maxWindowLength, curWindowLength);
         STEP 6
-            Return maxWindowLength
+        Return maxWindowLength
 
     TIME:
         O(n)
@@ -51,7 +51,7 @@ class MaxConsecutiveOnesV2 {
             }
         }
         // STEP 5
-            maxWindowLength = max(maxWindowLength, curWindowLength);
+        maxWindowLength = max(maxWindowLength, curWindowLength);
         // STEP 6
         return maxWindowLength;
     }

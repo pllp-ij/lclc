@@ -16,10 +16,10 @@ import static java.lang.Math.max;
             Else if met with 0, (meaning the end of the current window)
                 Reset curWindowLength to 0
             STEP 5
-                Update maxWindowLength
-                    maxWindowLength = Max(maxWindowLength, curWindowLength);
+            Update maxWindowLength
+                maxWindowLength = Max(maxWindowLength, curWindowLength);
         STEP 6
-            Return maxWindowLength
+        Return maxWindowLength
 
     TIME:
         O(n)
@@ -49,7 +49,7 @@ class MaxConsecutiveOnesV1 {
             maxWindowLength = max(maxWindowLength, curWindowLength);
         }
         // STEP 5
-            maxWindowLength = max(maxWindowLength, curWindowLength);
+        maxWindowLength = max(maxWindowLength, curWindowLength);
         // STEP 6
         return maxWindowLength;
     }
