@@ -80,7 +80,7 @@ public class LinkedList {
             curNode = curNode.next;
             idx++;
         }
-        str.append(" NULL");
+        str.append("NULL");
         return str.toString();
     }
 }

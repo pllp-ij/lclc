@@ -106,7 +106,7 @@ public class LinkedList {
             str.append(curNode.val + " -> ");
             curNode = curNode.next;
         }
-        str.append(" NULL");
+        str.append("NULL");
         return str.toString();
     }
 }
