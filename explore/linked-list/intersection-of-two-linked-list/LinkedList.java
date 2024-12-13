@@ -48,28 +48,6 @@ public class LinkedList {
         length++;
     }
     
-    public void createCycle(int[] nums, int pos) {
-        // create linked list from nums first
-        this.createLinkedList(nums);
-        // check pos validation
-        if (pos < 0 || pos >= length || nums.length == 0) {
-            return;
-        }
-        // find last node
-        LinkedListNode posNode = null;
-        LinkedListNode curNode = head;
-        int idx = 0;
-        while (idx < length - 1) {
-            // find node at pos
-            if (idx == pos) {
-                posNode = curNode;
-            }
-            curNode = curNode.next;
-            idx++;
-        }
-        // find last node at curNode and add cycle relationship
-        curNode.next = posNode;
-    }
     
     public void mergeList(int pos1, LinkedList list2, int pos2) {
         // check pos1 and pos2 validation
