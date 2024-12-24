@@ -12,6 +12,9 @@ NOTE:
             
         method3-DFS-extra-2d-space/DFS-stack-implementation/NumberOfIslandsV3 -> method1-BFS-extra-2d-space/NumberOfIslandsV3
             iterate each node in linked list with dummy head, from dummy head to last non-NULL node
+            the reason why an extra operation was done before the while loop for stack is that the dummy head is actually 
+            not pushed into stack, so it should be dealt with seperately, then the code within while loop when stack is 
+            not empty is for all the nodes from head to last non-NULL node
             
                                                                       NOTHING -> method1-BFS-extra-2d-space/NumberOfIslandsV4
         method1-BFS-extra-2d-space/NumberOfIslandsV4 just as a raw implementation of BFS, and all code written within one function, just for reference and learning

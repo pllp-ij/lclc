@@ -1,94 +1,87 @@
 import java.util.Arrays;
-import java.util.Set;
-import java.util.HashSet;
 import java.util.Queue;
 import java.util.LinkedList;
 
 /*
     VARS:
-        islandsNum(int): final result of number of islands
-        queue(Queue<Node>): a queue for BFS
+        islandsNum(int): the total number islands, also for final return result
         m(int): the row number of matrix
         n(int): the col number of matrix
-        visited(int[][]): a cache to store all positions has been visited
-        rowDirections(int[]): a row index of four directions in click-wise direction from top point
-        colDirections(int[]): a col index of four directions in click-wise direction from top point
-        curNode(Node): current iterated node
-        nextNode(Node): the next position in one of four directions of curNode
+        visited(int[][]): a cache matrix to indicate if current position is already visited
+        queue(Queue<Node>): a queue used when do BFS
     DESCRIPTION:
         STEP 1
-        Initialize Node class
         Initialize islandsNum to 0
-        Initialize queue to LinkedList<>()
         Initialize m to matrix.length
         Initialize n to matrix[0].length
-        Initialize visited to int[][]
-        Initialize rowDirections to {-1, 0, 1, 0};
-        Initialize colDirections to {0, 1, 0, -1};
-        Initialize curNode to null
-        Initialize nextNode to null
+        Initialize visited with same size of matrix
+            int[][] visited = new int[m][n]
         STEP 2
-        Iterate each row of matrix with index i
+        Iterate each row of matrix with i
             STEP 3
-            Iterate each col of matrix with index j
+            Iterate each col of matrix with j
                 STEP 4
-                If matrix[i][j] == 1, (meaning current number is 1)
-                    STPE 5
-                    Create new Node from current (i, j) position index
-                        Node startNode = new Node(i, j);
+                If matrix[i][j] == '1' and visited[i][j] != 1, (meaning current position(i, j) is valid and it is not visited yet)
+                    STEP 5
+                    Do BFS from current position (i, j)
+                        BFS(matrix, i, j, m, n, visited)
                     STEP 6
-                    If visited[i][j] != 1, (meaning current position is not visited before)
-                        STEP 7
-                        Add current position with new Node(i, j) to queue to start BFS
-                            queue.offer(startNode)
-                        STEP 8
-                        Set value of position (i, j) in visited to 1
-                            visited[i][j] = 1
-                        
-                        Now begin to do BFS from startNode in queue
-                        
-                        STEP 9
-                        Loop while queue is not empty
-                            STEP 10
-                            Pop front node from queue and assign it to curNode
-                                curNode = queue.poll();
-                            STEP 11
-                            Get curI, curJ from curNode
-                                int curI = curNode.i;
-                                int curJ = curNode.j;
-                            STEP 12
-                            Iterate each direction of four directions with idxDirection
-                                STEP 13
-                                Calculate next position with nextI, nextJ
-                                    int nextI = curI + rowDirections[idxDirection];
-                                    int nextJ = curJ + colDirections[idxDirection];
-                                STEP 14
-                                If isWithinRange(nextI, nextJ, m, n), (meaning next position is within valid range of matrix),
-                                    STEP 15
-                                    Create new Node(nextI, nextJ) from nextI and nextJ
-                                        nextNode = new Node(nextI, nextJ);
-                                    STEP 16
-                                    If visited[nextI][nextJ] != 1, (meaning next position has not been visited before)
-                                        STEP 17
-                                        If isNotWater(matrix, nextI, nextJ), (meaning next position is not water)
-                                            STEP 18
-                                            Add nextNode to queue,
-                                                queue.offer(nextNode)
-                                            STEP 19
-                                            Set the value of next position in visited to 1
-                                                visited[nextI][nextJ] = 1
-                        
-                        Now the BFS already done and queue is empty again and all connectable nodes to startNode are all visited
-                        
-                        STEP 20
-                        Increase islandsNum by one
-                            islandsNum++;
-        STEP 21
+                    Increase islandsNum by one
+                        islandsNum++;
+        STEP 7
         Return islandsNum
+        
+        -FUNC void BFS(char[][] matrix, int i, int j, int m, int n, int[][] visited)
+        STEP 1
+        Initialize Node class with properties i and j
+        Initialize queue to Queue<Node>
+        Initialize directions to {-1, 0, 1, 0, -1}
+        Initialize curNode to null
+        Initialize nextI to 0
+        Initialize nextJ to 0
+        STEP 2
+        Create new node from current position (i, j) and push it into queue
+            queue.offer(new Node(i, j));
+        STEP 3
+        Loop while queue is not empty
+            STEP 4
+            Pop front node from queue and assign it to curNode
+                curNode = queue.poll();
+            STEP 5
+            If isInInvalidRegion(matrix, curNode.i, curNode.j, m, n, visited), (meaning current position (curNode.i, curNode.j) is invalid)
+                STEP 6
+                Skip current iteration and jump to next iteration
+                    continue;
+            
+            Now when code not enter into above if statement and reach to this line, it means current position is valid
+            
+            STEP 7
+            Set current position (curNode.i, curNode.j) in visited to 1 to indicate current position is already visited
+                visited[curNode.i][curNode.j] = 1;
+            STEP 8
+            Iterate each of four directions with idxDirection
+                STEP 9
+                Get (nextI, nextJ) from (curNode.i, curNode.j) using directions and idxDirection
+                    nextI = curNode.i + directions[idxDirection];
+                    nextJ = curNode.j + directions[idxDirection + 1];
+                STEP 10
+                Create new node from (nextI, nextJ) and push it into queue
+                    queue.push(new Node(nextI, nextJ));
+        
+        -FUNC boolean isInInvalidRegion(char[][] matrix, int i, int j, int m, int n, int[][] visited)
+        STEP 1
+        If i < 0 || i >= m ||
+           j < 0 || j >= n ||
+           matrix[i][j] == '0' ||
+           visited[i][j] == 1, (meaning current position (i, j) is invalid)
+            STEP 2
+            return true;
+        STEP 3
+        Return false;
     TIME:
-        O(m * n), m is row number of matrix, n is col number of matrix
+        O(m * n), m is the row number of matrix, n is the col number of matrix
     SPACE:
-        O(m * n), m is row number of matrix, n is col number of matrix
+        O(m * n + m * n), first (m * n) is for visited cache matrix, second (m * n) is for max number of nodes stored in queue in worst cases
 */
 
 class Node {
@@ -106,98 +99,84 @@ public class NumberOfIslandsV1 {
     public static int getIslandsNum(char[][] matrix) {
         // STEP 1
         int islandsNum = 0;
-        Queue<Node> queue = new LinkedList<>();
         int m = matrix.length;
         int n = matrix[0].length;
         int[][] visited = new int[m][n];
-        int[] rowDirections = {-1, 0, 1, 0};
-        int[] colDirections = {0, 1, 0, -1};
-        Node startNode = null;
-        Node curNode =  null;
-        Node nextNode = null;
         // STEP 2
         for (int i = 0; i < m; i++) {
             // STEP 3
             for (int j = 0; j < n; j++) {
                 // STEP 4
-                if (matrix[i][j] == '1') {
+                if (matrix[i][j] == '1' && visited[i][j] != 1) {
                     // STEP 5
-                    startNode = new Node(i, j);
+                    BFS(matrix, i, j, m, n, visited);
                     // STEP 6
-                    if (visited[i][j] != 1) {
-                        // STEP 7
-                        queue.offer(startNode);
-                        // STEP 8
-                        visited[i][j] = 1;
-                        
-                        // BFS Start
-                        // STEP 9
-                        while (!queue.isEmpty()) {
-                            // STEP 10
-                            curNode = queue.poll();
-                            // STEP 11
-                            int curI = curNode.i;
-                            int curJ = curNode.j;
-                            // STEP 12
-                            for (int idxDirection = 0; idxDirection < 4; idxDirection++) {
-                                // STEP 13
-                                int nextI = curI + rowDirections[idxDirection];
-                                int nextJ = curJ + colDirections[idxDirection];
-                                // STEP 14
-                                if (isWithinRange(nextI, nextJ, m, n)) {
-                                    // STEP 15
-                                    nextNode = new Node(nextI, nextJ);
-                                    // STEP 16
-                                    if (visited[nextI][nextJ] != 1)  {
-                                        // STEP 17
-                                        if (isNotWater(matrix, nextI, nextJ)) {
-                                            // STEP 18
-                                            queue.offer(nextNode);
-                                            // STEP 19
-                                            visited[nextI][nextJ] = 1;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        // BFS END
-                        
-                        // STEP 20
-                        islandsNum++;
-                    }
+                    islandsNum++;
                 }
             }
         }
-        // STEP 21
+        // STEP 7
         return islandsNum;
     }
     
-    public static boolean isWithinRange(int i, int j, int m, int n) {
-        if (i < 0 || i >= m ||
-            j < 0 || j >= n) {
-                return false;
+    public static void BFS(char[][] matrix, int i, int j, int m, int n, int[][] visited) {
+        // STEP 1
+        Queue<Node> queue = new LinkedList<>();
+        int[] directions = {-1, 0, 1, 0, -1};
+        Node curNode = null;
+        int nextI = 0;
+        int nextJ = 0;
+        // STEP 2
+        queue.offer(new Node(i, j));
+        // STEP 3
+        while (!queue.isEmpty()) {
+            // STEP 4
+            curNode = queue.poll();
+            // STEP 5
+            if (isInInvalidRegion(matrix, curNode.i, curNode.j, m, n, visited)) {
+                // STEP 6
+                continue;
+            }
+            // STEP 7
+            visited[curNode.i][curNode.j] = 1;
+            // STEP 8
+            for (int idxDirection = 0; idxDirection < 4; idxDirection++) {
+                // STEP 9
+                nextI = curNode.i + directions[idxDirection];
+                nextJ = curNode.j + directions[idxDirection + 1];
+                // STEP 10
+                queue.offer(new Node(nextI, nextJ));
+            }
         }
-        return true;
     }
     
-    public static boolean isNotWater(char[][] matrix, int i, int j) {
-        return matrix[i][j] != '0';
+    public static boolean isInInvalidRegion(char[][] matrix, int i, int j, int m, int n, int[][] visited) {
+        // STEP 1
+        if (i < 0 || i >= m ||
+            j < 0 || j >= n ||
+            matrix[i][j] == '0' ||
+            visited[i][j] == 1) {
+            // STEP 2
+            return true;
+        }
+        // STEP 3
+        return false;
     }
     
     public static void main(String[] args) {
-        char[][] matrix = {
-            {'1', '1', '1', '1', '0'},
-            {'1', '1', '0', '1', '0'},
-            {'1', '1', '0', '0', '0'},
-            {'0', '0', '0', '0', '0'}
-        };
-        
         // char[][] matrix = {
+            // {'1', '1', '1', '1', '0'},
+            // {'1', '1', '0', '1', '0'},
             // {'1', '1', '0', '0', '0'},
-            // {'1', '1', '0', '0', '0'},
-            // {'0', '0', '1', '0', '0'},
-            // {'0', '0', '0', '1', '1'}
-        // };
+            // {'0', '0', '0', '0', '0'}
+        // };  // 1
+        
+        char[][] matrix = {
+            {'1', '1', '0', '0', '0'},
+            {'1', '1', '0', '0', '0'},
+            {'0', '0', '1', '0', '0'},
+            {'0', '0', '0', '1', '1'}
+        };  // 3
         System.out.println("matrix: " + Arrays.deepToString(matrix));
         
         int result = getIslandsNum(matrix);

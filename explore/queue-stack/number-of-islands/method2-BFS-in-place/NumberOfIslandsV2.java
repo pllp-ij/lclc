@@ -43,33 +43,27 @@ import java.util.LinkedList;
         Loop while queue is not empty
             STEP 4
             Pop front node from queue and assign it to curNode
-                curNode = queue.poll();
+                curNode = queue.poll();         
             STEP 5
-            If isInInvalidRegion(matrix, curNode.i, curNode.j, m, n), (meaning current position (curNode.i, curNode.j) is invalid)
-                STEP 6
-                Skip current iteration and jump to next iteration
-                    continue;
-            
-            Now when code not enter into above if statement and reach to this line, it means current position is valid
-            
-            STEP 7
             Set current position (curNode.i, curNode.j) in matrix to '0' to indicate current position is already visited
                 matrix[curNode.i][curNode.j] = '0';
-            STEP 8
+            STEP 6
             Iterate each of four directions with idxDirection
-                STEP 9
+                STEP 7
                 Get (nextI, nextJ) from (curNode.i, curNode.j) using directions and idxDirection
                     nextI = curNode.i + directions[idxDirection];
                     nextJ = curNode.j + directions[idxDirection + 1];
-                STEP 10
-                Create new node from (nextI, nextJ) and push it into queue
-                    queue.push(new Node(nextI, nextJ));
+                STEP 8
+                If isInValidRegion(matrix, nextI, nextJ, m, n), (meaning next position (nextI, nextJ) is valid)                
+                    STEP 9
+                    Create new node from (nextI, nextJ) and push it into queue
+                        queue.push(new Node(nextI, nextJ));
         
-        -FUNC boolean isInInvalidRegion(char[][] matrix, int i, int j, int m, int n)
+        -FUNC boolean isInValidRegion(char[][] matrix, int i, int j, int m, int n)
         STEP 1
-        If i < 0 || i >= m ||
-           j < 0 || j >= n ||
-           matrix[i][j] == '0', (meaning current position (i, j) is invalid)
+        If i >= 0 && i < m &&
+           j >= 0 && j < n &&
+           matrix[i][j] == '1', (meaning current position (i, j) is valid)
             STEP 2
             return true;
         STEP 3
@@ -90,7 +84,7 @@ class Node {
     }
 }
 
-public class NumberOfIslandsV1 {
+public class NumberOfIslandsV2 {
     
     public static int getIslandsNum(char[][] matrix) {
         // STEP 1
@@ -128,28 +122,26 @@ public class NumberOfIslandsV1 {
             // STEP 4
             curNode = queue.poll();
             // STEP 5
-            if (isInInvalidRegion(matrix, curNode.i, curNode.j, m, n)) {
-                // STEP 6
-                continue;
-            }
-            // STEP 7
             matrix[curNode.i][curNode.j] = '0';
-            // STEP 8
+            // STEP 6
             for (int idxDirection = 0; idxDirection < 4; idxDirection++) {
-                // STEP 9
+                // STEP 7
                 nextI = curNode.i + directions[idxDirection];
                 nextJ = curNode.j + directions[idxDirection + 1];
-                // STEP 10
-                queue.offer(new Node(nextI, nextJ));
+                // STEP 8
+                if (isInValidRegion(matrix, nextI, nextJ, m, n)) {
+                    // STEP 9
+                    queue.offer(new Node(nextI, nextJ));
+                }
             }
         }
     }
     
-    public static boolean isInInvalidRegion(char[][] matrix, int i, int j, int m, int n) {
+    public static boolean isInValidRegion(char[][] matrix, int i, int j, int m, int n) {
         // STEP 1
-        if (i < 0 || i >= m ||
-            j < 0 || j >= n ||
-            matrix[i][j] == '0') {
+        if (i >= 0 && i < m &&
+            j >= 0 && j < n &&
+            matrix[i][j] == '1') {
             // STEP 2
             return true;
         }
@@ -158,19 +150,19 @@ public class NumberOfIslandsV1 {
     }
     
     public static void main(String[] args) {
-        char[][] matrix = {
-            {'1', '1', '1', '1', '0'},
-            {'1', '1', '0', '1', '0'},
-            {'1', '1', '0', '0', '0'},
-            {'0', '0', '0', '0', '0'}
-        };  // 1
-        
         // char[][] matrix = {
+            // {'1', '1', '1', '1', '0'},
+            // {'1', '1', '0', '1', '0'},
             // {'1', '1', '0', '0', '0'},
-            // {'1', '1', '0', '0', '0'},
-            // {'0', '0', '1', '0', '0'},
-            // {'0', '0', '0', '1', '1'}
-        // };  // 3
+            // {'0', '0', '0', '0', '0'}
+        // };  // 1
+        
+        char[][] matrix = {
+            {'1', '1', '0', '0', '0'},
+            {'1', '1', '0', '0', '0'},
+            {'0', '0', '1', '0', '0'},
+            {'0', '0', '0', '1', '1'}
+        };  // 3
         System.out.println("matrix: " + Arrays.deepToString(matrix));
         
         int result = getIslandsNum(matrix);
