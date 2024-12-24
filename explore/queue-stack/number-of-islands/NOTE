@@ -1,0 +1,21 @@
+NOTE: 
+    The same DFS logic matching relationship are,
+        method3-DFS-extra-2d-space/DFS-stack-implementation/NumberOfIslandsV1 -> method3-DFS-extra-2d-space/DFS-recursion-implementation/NumberOfIslandsV1
+        method3-DFS-extra-2d-space/DFS-stack-implementation/NumberOfIslandsV2 -> method3-DFS-extra-2d-space/DFS-recursion-implementation/NumberOfIslandsV2
+        
+    The same logic between "process queue in BFS" and "process stack in DFS" are:
+        method3-DFS-extra-2d-space/DFS-stack-implementation/NumberOfIslandsV1 -> method1-BFS-extra-2d-space/NumberOfIslandsV1
+            iterate each node in linked list without dummy head, from head to NULL
+            
+        method3-DFS-extra-2d-space/DFS-stack-implementation/NumberOfIslandsV2 -> method1-BFS-extra-2d-space/NumberOfIslandsV2
+            iterate each node in linked list without dummy head, from head to last non-NULL node
+            
+        method3-DFS-extra-2d-space/DFS-stack-implementation/NumberOfIslandsV3 -> method1-BFS-extra-2d-space/NumberOfIslandsV3
+            iterate each node in linked list with dummy head, from dummy head to last non-NULL node
+    
+    The reason why 
+        the solutions number in method3-DFS-extra-2d-space/DFS-recursion-implementation is 2, and
+        the solutions number in method3-DFS-extra-2d-space/DFS-stack-implementation is 3,
+        is that the V3 in method3-DFS-extra-2d-space/DFS-stack-implementation is a solution based on dummy head, 
+         but V1 and V2 in method3-DFS-extra-2d-space/DFS-recursion-implementation is not based on dummy head, because the position in parameters is (i, j), not the dummy head position
+         so if redesign the parameters as the dummy head position, then there should be a V3 in method3-DFS-extra-2d-space/DFS-recursion-implementation
