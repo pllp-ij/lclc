@@ -2,9 +2,6 @@ import java.util.Arrays;
 import java.util.Stack;
 
 /*
-    NOTE: The corresponding DFS matching relationship are,
-        DFS-stack-implementation/NumberOfIslandsV1 -> DFS-recursion-implementation/NumberOfIslandsV1
-        DFS-stack-implementation/NumberOfIslandsV2 -> DFS-recursion-implementation/NumberOfIslandsV2
     VARS:
         islandsNum(int): the number of islands, also for final return
         m(int): the row number of current matrix
@@ -33,36 +30,43 @@ import java.util.Stack;
         -FUNC void DFS(char[][] matrix, int i, int j, int m, int n)
         STEP 1
         Create class Node with property i and j
+        STEP 2
         Initialize stack as Stack<Node>
             Stack<Node> stakc = new Stack<>();
         Initialize directions as {-1, 0, 1, 0, -1}
         Initialize curNode to null
         Initialize nextI to 0
         Initialize nextJ to 0
-        STEP 2
-        Add current position node Node(i, j) into stack
-            stack.push(new Node(i, j));
-        STEP 3
-        Loop while !stack.isEmpty(), (when stack is not empty)
+        STEP 3 - OPTIONAL for STEP 3, but STEP 4 and STEP 5 are still needed
+        If isInValidRegion(matrix, i, j, m, n), (is the starting node is valid, this is optional, because the first node should always be true)            
             STEP 4
+            Add current position node Node(i, j) into stack
+                stack.push(new Node(i, j));
+            STEP 5
+            Set current position (i, j) in matrix to '0' to indicate current position is already visited and now become invalid
+                matrix[i][j] = '0';
+                
+        Above STEP 3, STEP 4 and STEP 5 always check all next state nodes in next level when it is now on current level, in this case, the "STEP 3 -> STEP 4 -> STEP 5" is the operation for current dummy head, so does it in logic within while loop for stack,
+        so "STEP 3 -> STEP 4 -> STEP 5" is matching to "STEP 10 -> STEP 11 -> STEP 12"
+                
+        STEP 6
+        Loop while !stack.isEmpty(), (when stack is not empty)
+            STEP 7
             Pop top node from stack and assign it to curNode
                 curNode = stack.pop();
-            STEP 5
-            Since the code not enter into the if statement above and reach to this line of code, means the position (curNode.i, curNode.j) is valid, so set the matrix[curNode.i][curNode.j] to '0' to indicate the point is invalid now
-                matrix[curNode.i][curNode.j] = '0';
-            STEP 6
+            STEP 8
             Iterate each direction of four directions with idxDirection
-                STEP 7
+                STEP 9
                 Generate Node(nextI, nextJ) from (curNode.i, curNode.j) using directions and idxDirection
                     nextI = curNode.i + directions[idxDirection];
                     nextJ = curNode.j + directions[idxDirection + 1];
-                STEP 8
+                STEP 10
                 If isInValidRegion(matrix, nextI, nextJ, m, n), (meaning next position (nextI, nextJ) is valid)
-                    STEP 9
+                    STEP 11
                     Create new Node(nextI, nextJ) and push it into stack
                         stack.push(new Node(nextI, nextJ));
-                    STEP 10
-                    Set next position (nextI, nextJ) in matrix to '0' to indicate next node is visited, (though current iteration is on current node, but the next node's visibility property is processed in advance, though it is repeated as STEP 5, but it is not a wrong logic, these is for problems in which latest version of visited should be always updated in each iteration of queue pop, such as "clone graph problem")
+                    STEP 12
+                    Set position (nextI, nextJ) in matrix to '0' to indicate current position is already visited and now become invalid
                         matrix[nextI][nextJ] = '0';
 
         -FUNC boolean isInInvalidRegion(char[][] matrix, int i, int j, int m, int n)
@@ -90,7 +94,7 @@ class Node {
     }
 }
 
-public class NumberOfIslandsV3 {
+public class NumberOfIslandsV4 {
     
     public static int getIslandsNum(char[][] matrix) {
         // STEP 1
@@ -121,24 +125,27 @@ public class NumberOfIslandsV3 {
         Node curNode = null;
         int nextI = 0;
         int nextJ = 0;
-        // STEP 2
-        stack.push(new Node(i, j));
-        // STEP 3
-        while (!stack.isEmpty()) {
+        // STEP 3, OPTIONAL because for first node, if statement will always be true, so STEP 4 and STEP 5 can be placed outside the if statement
+        if (isInValidRegion(matrix, i, j, m, n)) {
             // STEP 4
-            curNode = stack.pop();
+            stack.push(new Node(i, j));
             // STEP 5
-            matrix[curNode.i][curNode.j] = '0';
-            // STEP 6
+            matrix[i][j] = '0';
+        }
+        // STEP 6
+        while (!stack.isEmpty()) {
+            // STEP 7
+            curNode = stack.pop();
+            // STEP 8
             for (int idxDirection = 0; idxDirection < 4; idxDirection++) {
-                // STEP 7
+                // STEP 9
                 nextI = curNode.i + directions[idxDirection];
                 nextJ = curNode.j + directions[idxDirection + 1];
-                // STEP 8
+                // STEP 10
                 if (isInValidRegion(matrix, nextI, nextJ, m, n)) {
-                    // STEP 9
+                    // STEP 11
                     stack.push(new Node(nextI, nextJ));
-                    // STEP 10
+                    // STEP 12
                     matrix[nextI][nextJ] = '0';
                 }
             }

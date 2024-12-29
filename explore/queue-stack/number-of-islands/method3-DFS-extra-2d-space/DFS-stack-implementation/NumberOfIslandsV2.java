@@ -35,7 +35,6 @@ import java.util.Stack;
         -FUNC void DFS(char[][] matrix, int i, int j, int m, int n, int[][] visited)
         STEP 1
         Create class Node with property i and j
-        STEP 2
         Initialize stack as Stack<Node>
             Stack<Node> stakc = new Stack<>();
         Initialize directions as {-1, 0, 1, 0, -1}
@@ -43,26 +42,26 @@ import java.util.Stack;
         Initialize curNode to null
         Initialize nextI to 0
         Initialize nextJ to 0
-        STEP 3
+        STEP 2
         Add current position node Node(i, j) into stack
             stack.push(new Node(i, j));
-        STEP 4
+        STEP 3
         Loop while !stack.isEmpty(), (when stack is not empty)
-            STEP 5
+            STEP 4
             Pop top node from stack and assign it to curNode
                 curNode = stack.pop();
-            STEP 6
+            STEP 5
             Since the code not enter into the if statement above and reach to this line of code, means the position (curNode.i, curNode.j) is valid, so set the visited[curNode.i][curNode.j] to 1
                 visited[curNode.i][curNode.j] = 1;
-            STEP 7
+            STEP 6
             Iterate each direction of four directions with idxDirection
-                STEP 8
+                STEP 7
                 Generate Node(nextI, nextJ) from (curNode.i, curNode.j) using directions and idxDirection
                     nextI = curNode.i + directions[idxDirection];
                     nextJ = curNode.j + directions[idxDirection + 1];
-                STEP 9
+                STEP 8
                 If isInValidRegion(matrix, nextI, nextJ, m, n, visited), (meaning next position (nextI, nextJ) is valid)
-                    STEP 10
+                    STEP 9
                     Create new Node(nextI, nextJ) and push it into stack
                         stack.push(new Node(nextI, nextJ));
 
