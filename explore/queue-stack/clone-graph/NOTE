@@ -1,0 +1,13 @@
+NOTE:
+    in 
+        method2-DFS-with-hashmap/DFS-recursion-implementation/,
+    Compared to V1, V2, V3, the method V5 is a recursive method with return type,
+    in V1, V2, V3, each level of recursive only process current node and next level node, but
+    in V5, the recursion will finish all nodes from next level to the end, so the code in V5 is more neat
+    
+    Left question:
+        In V1, V2, V3, not only for DFS-recursion-implementation, actually in all other positions where these three version of
+        code exist, there should be two seperate cache data structure to be used, one is for storing all nodes that has been visited,
+        another one is for recording every pair relationship between current level and next level.
+        But in V5, there is only one map needed, because within each recursion, the next level will be finished completely from next level to the end,
+        so there is no need for two cache
