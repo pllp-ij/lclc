@@ -1,0 +1,14 @@
+NOTE:
+    V1, V2 in 
+        method1-BFS/
+        method2-DFS/DFS-recursion-implementation
+        method2-DFS/DFS-stack-implementation
+    are matching version
+    
+    V3, V4 in
+        method2-DFS/DFS-recursion-implementation
+    are using two variables to replace Node class
+    
+    V5 in
+        method2-DFS/DFS-recursion-implementation
+    is using pure recursion way with index of nums
