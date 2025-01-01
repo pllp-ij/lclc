@@ -1,0 +1,14 @@
+NOTE:
+    method1-two-stacks-one-stack-fixed/MyQueueV1 is under assumption:
+        stack1 top is the head of queue
+        stack1 bottom is the tail of queue
+    
+    method1-two-stacks-one-stack-fixed/MyQueueV2 is under assumption:
+        stack1 top is the tail of queue
+        stack2 bottom is the head of queue
+        
+    the reason there are V1, V2 two version in
+        method1-two-stacks-one-stack-fixed/
+    but only V1 one version in 
+        method2-two-stacks-alternative
+    is that in method2, the two stack are symmetric, so switch head or tail of queue doesn't matter

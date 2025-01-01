@@ -1,0 +1,45 @@
+NOTE:
+    stack-top-is-queue-head/ is under assumption:
+        stack1 top is the head of queue
+        stack1 bottom is the tail of queue
+    
+    stack-top-is-queue-tail/ is under assumption:
+        stack1 top is the tail of queue
+        stack2 bottom is the head of queue
+        
+    the reason that there is no corresponding version code in
+        stack-top-is-queue-head/with-return-value/
+    is that when "stack top is queue head", all the methods have return value don't calling recursively, they can just done in O(1) operation
+        
+    all version in
+        stack-top-is-queue-head/without-return-value/ and
+        stack-top-is-queue-tail/without-return-value/ and
+        stack-top-is-queue-tail/with-return-value/
+    are processing initial null case before recursion, which is a better way
+        
+    stack-top-is-queue-head/without-return-value/MyQueueV1
+    stack-top-is-queue-tail/without-return-value/MyQueueV1
+    stack-top-is-queue-tail/with-return-value/MyQueueV1: 
+        there is validation check at the beginning, if stack is empty, directly return, then push val when current level is the last valid level(stack now has only one element left and then popped off), then push back other elements
+        in essence, MyQueueV3 here is almost similar to MyQueueV1
+        -> correponding to normal verison 1 of recursion code, refer to problem "number of islands"
+    stack-top-is-queue-head/without-return-value/MyQueueV2
+    stack-top-is-queue-tail/without-return-value/MyQueueV2
+    stack-top-is-queue-tail/with-return-value/MyQueueV2: 
+        there is no validation check at the beginning, but will enter into next level of recursion only when they are valid
+        -> correponding to normal verison 2 of recursion code, refer to problem "number of islands"
+
+    stack-top-is-queue-head/without-return-value/MyQueueV3
+        push val as soon as current level is invalid(stack is empty), then push back other elements
+    stack-top-is-queue-tail/without-return-value/NULL
+    stack-top-is-queue-tail/with-return-value/NULL: 
+        the reason why 
+            stack-top-is-queue-tail/without-return-value and
+            stack-top-is-queue-tail/with-return-value
+        have no V3 is that in 
+            stack-top-is-queue-head/without-return-value/MyQueueV3
+        the push operation of val can be done whenever current level is null or current level is the last element in stack, because val can always be accessed in these two conditions,
+        but in
+            stack-top-is-queue-tail/without-return-value and
+            stack-top-is-queue-tail/with-return-value
+        the last element's value of stack can only be accessed when current level is the last element, when current level is null, it cannot be accessed, so there is no such as V3 code
