@@ -1,0 +1,12 @@
+NOTE:
+    the reason there is no code in
+        queue-tail-is-stack-top
+    is that when using recursion in this condition, its best implementation is the same as the code in
+        queue-head-is-stack-top,
+    especially in push method, both conditions need to push val into the tail of the queue then do a recursion to reverse the order to make val at the head of queue
+    
+    method4-one-queue-with-recursion/queue-head-is-stack-top/MyStackV1:
+        corresponding to recursion V1 in "number of islands"
+    method4-one-queue-with-recursion/queue-head-is-stack-top/MyStackV2:
+        corresponding to recursion V2 in "number of islands"
+    
