@@ -1,0 +1,19 @@
+NOTE:
+    whether in 
+        max-heap/method1-by-iteration/ or 
+        min-heap/method1-by-iteration/
+    the versions of code:
+        iterate-all-parent-nodes/HeapSortV1 and 
+        iterate-along-largest(smallest)-path/HeapSortV1 and
+        iterate-along-largest(smallest)-path/HeapSortV2
+    are three versions of implementation heap sort, the 
+        iterate-all-parent-nodes/HeapSortV1
+    will iterate all parent nodes in both two direction: from bottom to top and from top to bottom, while the
+        iterate-along-largest(smallest)-path/HeapSortV1
+    will iterate each parent nodes in direction: from bottom to top, but it only check parent nodes along largest path from top to bottom, and the
+        iterate-along-largest(smallest)-path/HeapSortV2
+    will not iterate parent nodes one by one in both directions from second heapification operation, because after the first heapify, all other branches except starting from the tail node are satisfying the max/min heap restriction,
+    so only check all nodes by "node = node.parent" relationshipbecause after the first heapify
+
+    the running speed is:
+        iterate-all-parent-nodes/HeapSortV1 < iterate-along-largest(smallest)-path/HeapSortV1 < iterate-along-largest(smallest)-path/HeapSortV2
