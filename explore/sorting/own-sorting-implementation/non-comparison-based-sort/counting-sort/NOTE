@@ -1,0 +1,4 @@
+NOTE:
+    V1 and V2 in 
+        with-range-shift/
+    will deal with minVal(range shift) only the target is nums, because the element of nums may be negative, which is not a valid index of countArr or startIndexArr
