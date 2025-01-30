@@ -1,0 +1,2 @@
+idxQuery == 2, idxDigit == 0 result:
+sorted sorted array: [251, 102, 473, 814]
